@@ -154,6 +154,7 @@ namespace UITests
         {
             // We expect the driver to implement IJavaScriptExecutor.
             // IJavaScriptExecutor enables us to execute JavaScript code during the tests.
+            // This one is nice because it permits click links without first scrolling them into view
             IJavaScriptExecutor js = driver as IJavaScriptExecutor;
 
             // Through JavaScript, run the click() method on the underlying HTML object.
