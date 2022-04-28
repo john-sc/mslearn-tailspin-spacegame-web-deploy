@@ -114,7 +114,7 @@ stages:
               package: '$(Pipeline.Workspace)/drop/$(buildConfiguration)/*.zip'
               appType: webApp
   - job: RunUITests
-    dependsOn: Deploy
+    dependsOn: Deploy # must be the one above in the same stage?
     displayName: 'Run UI tests'
     pool:
       vcImage: 'windows-2019'
