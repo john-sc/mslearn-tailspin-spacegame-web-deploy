@@ -113,31 +113,6 @@ stages:
               appName: '$(WebAppNameTest)'
               package: '$(Pipeline.Workspace)/drop/$(buildConfiguration)/*.zip'
               appType: webApp
-  - job: RunUITests
-    dependsOn: Deploy # must be the one above in the same stage?
-    displayName: 'Run UI tests'
-    pool:
-      vcImage: 'windows-2019'
-    variables:
-    - group: 'Release'
-    steps:
-    - task: UseDotNet@2
-      displayName: 'Use .NET SDK $(dotNetSdkVersion)'
-      inputs:
-        version: '$(dotNetSdkVersion)'
-    - task: DotNetCoreCLI@2
-      displayName: 'Build the project $(buildConfiguration)'
-      inputs:
-        command: 'build'
-        arguments: '--configuration $(buildConfiguration)'
-        projects: '$(System.DefaultWorkingDirectory)/**/*UITests.csproj'
-    - task: DotNetCoreCLI@2
-      displayName: 'Run UI tests $(buildConfiguration)'
-      inputs:
-        command: 'test'
-        arguments: '--no-build --configuration $(buildConfiguration)'
-        publishTestResults: true
-        projects: '$(System.DefaultWorkingDirectory)/**/*UITests.csproj'
 
 - stage: 'Staging'
   displayName: 'Deploy to the staging environment'
